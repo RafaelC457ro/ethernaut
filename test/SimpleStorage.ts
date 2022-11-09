@@ -38,7 +38,7 @@ describe("SimpleStorage", () => {
     const transation = await simpleStorage.addPerson("vitalik", "3");
     await transation.wait(1);
     const [currentVitalikFavoriteNumber, name] = await simpleStorage.people(0);
-    console.log(currentVitalikFavoriteNumber);
+
     expect(currentVitalikFavoriteNumber).to.equal(expectedValue);
     expect(name).to.equal("vitalik");
   });
