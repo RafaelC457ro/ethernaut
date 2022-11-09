@@ -16,9 +16,18 @@ async function main() {
   //   `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
   // );
 
+  const [deployer] = await ethers.getSigners();
+
+  console.log("Deploying contracts with the account:", deployer.address);
+
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+
   const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
+
   console.log("Deploying contract...");
   const simpleStorage = await SimpleStorageFactory.deploy();
+
+  //console.log(`Contract Address: ${simpleStorage.address}`);
   await simpleStorage.deployed();
   console.log(`Deployed contract to: ${simpleStorage.address}`);
 }
