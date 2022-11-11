@@ -8,7 +8,6 @@ describe("SimpleStorage", () => {
       "SimpleStorage"
     );
 
-    console.log("Deploying contract...");
     const simpleStorage = await SimpleStorageFactory.deploy();
     return { simpleStorage };
   }

@@ -3,8 +3,10 @@ import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "@nomiclabs/hardhat-solhint";
-import "hardhat-deploy";
 import "@nomiclabs/hardhat-etherscan";
+import "@typechain/hardhat";
+import "@nomiclabs/hardhat-ethers";
+import "hardhat-deploy";
 
 import * as dotenv from "dotenv";
 dotenv.config();

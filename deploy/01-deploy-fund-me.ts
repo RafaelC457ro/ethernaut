@@ -36,4 +36,6 @@ const deployment: DeployFunction = async function ({
   log("---------------------------------------------------------");
 };
 
+deployment.tags = ["all", "fundme"];
+
 export default deployment;
