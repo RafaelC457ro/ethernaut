@@ -1,5 +1,5 @@
 import { ethers, deployments, getNamedAccounts } from "hardhat";
-import { assert, expect } from "chai";
+import { expect } from "chai";
 import { FundMe, MockV3Aggregator } from "../../typechain-types";
 
 describe("SimpleStorage", () => {
@@ -37,6 +37,105 @@ describe("SimpleStorage", () => {
 
       const response = await fundMe.addressToAmountFunded(deployer);
       expect(response.toString()).to.equal(sendValue.toString());
+    });
+
+    it("should adds funder to array of funders", async () => {
+      await fundMe.fund({
+        value: sendValue,
+      });
+
+      const funder = await fundMe.funders(0);
+      expect(funder).to.equal(deployer);
+    });
+  });
+
+  describe("withdraw", () => {
+    beforeEach(async () => {
+      await fundMe.fund({
+        value: sendValue,
+      });
+    });
+
+    it("should withdraw ETH from a single founder", async () => {
+      const startingFundMeBalance = await fundMe.provider.getBalance(
+        fundMe.address
+      );
+
+      const startingDeployerBalance = await fundMe.provider.getBalance(
+        deployer
+      );
+
+      const transactionResponse = await fundMe.withdraw();
+      const transactionReceipt = await transactionResponse.wait(1);
+
+      const gasCost = transactionReceipt.gasUsed.mul(
+        transactionReceipt.effectiveGasPrice
+      );
+      const endingFundMeBalance = await fundMe.provider.getBalance(
+        fundMe.address
+      );
+
+      const endingDeployerBalance = await fundMe.provider.getBalance(deployer);
+
+      expect(endingFundMeBalance).to.equal(0);
+      expect(endingDeployerBalance.toString()).to.equal(
+        startingDeployerBalance.add(startingFundMeBalance).sub(gasCost)
+      );
+    });
+
+    it("it should allow us to withdraw with multiple funders", async () => {
+      const accounts = await ethers.getSigners();
+
+      for (let i = 1; i < 6; i++) {
+        const fundMeConnectedContract = await fundMe.connect(accounts[i]);
+
+        await fundMeConnectedContract.fund({
+          value: sendValue,
+        });
+      }
+
+      const startingFundMeBalance = await fundMe.provider.getBalance(
+        fundMe.address
+      );
+
+      const startingDeployerBalance = await fundMe.provider.getBalance(
+        deployer
+      );
+
+      const transactionResponse = await fundMe.withdraw();
+      const transactionReceipt = await transactionResponse.wait(1);
+
+      const gasCost = transactionReceipt.gasUsed.mul(
+        transactionReceipt.effectiveGasPrice
+      );
+      const endingFundMeBalance = await fundMe.provider.getBalance(
+        fundMe.address
+      );
+
+      const endingDeployerBalance = await fundMe.provider.getBalance(deployer);
+
+      expect(endingFundMeBalance).to.equal(0);
+      expect(endingDeployerBalance.toString()).to.equal(
+        startingDeployerBalance.add(startingFundMeBalance).sub(gasCost)
+      );
+
+      expect(fundMe.funders(0)).to.be.reverted;
+
+      for (let i = 1; i < 6; i++) {
+        expect(
+          await fundMe.addressToAmountFunded(accounts[i].address)
+        ).to.equal(0);
+      }
+    });
+
+    it("should only allow the owner to withdraw", async () => {
+      const accounts = await ethers.getSigners();
+      const attacker = accounts[1];
+
+      const attackerConnectedContract = fundMe.connect(attacker);
+      expect(attackerConnectedContract.withdraw()).to.be.revertedWith(
+        "FundMe__NotOwner"
+      );
     });
   });
 });

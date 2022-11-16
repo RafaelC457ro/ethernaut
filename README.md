@@ -8,3 +8,4 @@ Try running some of the following tasks:
 
 - [] try solve all solhint errors
 - [] 100% tests
+- [] try to test fallback and receive
