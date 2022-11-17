@@ -1,5 +1,7 @@
 {
   "name": "hardhat-project",
+  "author": "Rafael Castro",
+  "version": "1.0.0",
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
@@ -27,7 +29,9 @@
     "format-code": "npx prettier --write .",
     "format": "npm run format-contract && npm run format-code",
     "test": "npx hardhat test",
-    "coverage": "npx hardhat coverage"
+    "coverage": "npx hardhat coverage",
+    "lint": "npx solhint 'contracts/**/*.sol'",
+    "lint-fix": "npx solhint -c ./.solhint.json 'contracts/**/*.sol' --fix"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.5.1"

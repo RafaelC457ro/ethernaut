@@ -11,7 +11,9 @@ const deployment: DeployFunction = async function ({
   const { deployer } = await getNamedAccounts();
   const chainId = network.config.chainId;
 
-  if (chainId === 31337) {
+  const isLocalTest = chainId === 31337;
+
+  if (isLocalTest) {
     log("deploying mocks");
     await deploy("MockV3Aggregator", {
       from: deployer,
