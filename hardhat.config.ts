@@ -14,7 +14,7 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
-      { version: "0.8.8" },
+      { version: "0.8.0" },
       {
         version: "0.6.6",
       },
@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: process.env.GOERLI_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY!],
+      accounts: [process.env.PRIVATE_KEY!, process.env.PRIVATE_KEY_2!],
       chainId: 5,
     },
     localhost: {
@@ -47,6 +47,9 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: {
       default: 0,
+    },
+    targetDeployer: {
+      default: 1,
     },
   },
   etherscan: {

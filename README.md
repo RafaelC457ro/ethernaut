@@ -1,11 +1,11 @@
 # My Hardhat Project
 
-This project is my learn enviroment to study smart contracts using Solidity!
+This project is my learn environment to study smart contracts using Solidity!
 
-Try running some of the following tasks:
+Things that I learned:
 
-## todo
-
-- [] try solve all solhint errors
-- [] 100% tests
-- [] try to test fallback and receive
+- Hardhat setup
+- Basic of Solidity
+- How set up and deploy a contract
+- How to test
+- Estimate gas

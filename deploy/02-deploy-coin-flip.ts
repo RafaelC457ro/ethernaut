@@ -1,8 +1,6 @@
 import { network } from "hardhat";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { networkConfig } from "../helper-hardhat-config";
-import { verify } from "../utils/verify";
 
 const deployment: DeployFunction = async function ({
   getNamedAccounts,
@@ -10,32 +8,23 @@ const deployment: DeployFunction = async function ({
 }: HardhatRuntimeEnvironment) {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
+
   const chainId = network.config.chainId;
 
-  let ethUsdPriceFeedAddress;
   const isLocalTest = chainId === 31337;
 
-  if (isLocalTest) {
-    const ethUsdAggregator = await deployments.get("MockV3Aggregator");
-    ethUsdPriceFeedAddress = ethUsdAggregator.address;
-  } else {
-    ethUsdPriceFeedAddress = networkConfig[chainId!].ethUsdPriceFeed;
-  }
-
-  const args = [ethUsdPriceFeedAddress];
-  const fundMe = await deploy("FundMe", {
+  await deploy("CoinFlipAttacker", {
     from: deployer,
-    args: args,
+    args: ["0x847ef7006e390e406e7514fCBE409ddfD8f76698"], // hardcoded changes everytime
     log: true,
+    waitConfirmations: isLocalTest ? 1 : 6,
   });
 
-  if (!isLocalTest) {
-    await verify(fundMe.address, args);
-  }
+  log("CoinFlip Attacker deployed!");
 
   log("---------------------------------------------------------");
 };
 
-deployment.tags = ["all", "fundme"];
+deployment.tags = ["all", "coin-flip"];
 
 export default deployment;
