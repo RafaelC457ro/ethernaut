@@ -1,11 +1,7 @@
 # My Hardhat Project
 
-This project is my learn environment to study smart contracts using Solidity!
+This project is my learn environment to study how to hack Solidity smart contracts!
 
 Things that I learned:
 
-- Hardhat setup
-- Basic of Solidity
-- How set up and deploy a contract
-- How to test
-- Estimate gas
+- storage layout (https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-12-reading-the-storage/topic/the-storage-layout/)
