@@ -31,7 +31,11 @@ const config: HardhatUserConfig = {
     },
     goerli: {
       url: process.env.GOERLI_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY!, process.env.PRIVATE_KEY_2!],
+      accounts: [
+        process.env.PRIVATE_KEY!,
+        process.env.PRIVATE_KEY_2!,
+        process.env.PRIVATE_KEY_3!,
+      ],
       chainId: 5,
     },
     localhost: {
@@ -53,6 +57,9 @@ const config: HardhatUserConfig = {
     },
     targetDeployer: {
       default: 1,
+    },
+    thirdDeployer: {
+      default: 3,
     },
   },
   etherscan: {

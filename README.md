@@ -56,3 +56,6 @@ Things that I learned:
     The first gate is the same as Gatekeeper One.
     Second Gate, I googled a little bit and found that `extcodesize` returns 0 when the function was called from a contract constructor. e.g https://consensys.github.io/smart-contract-best-practices/development-recommendations/solidity-specific/extcodesize-checks/
     The third gate was difficult. But, at end of the day, It was just a bitwise mask operation.
+
+16. NaughtCoin
+    It was easy. Make sure You know how ERC20 allowance works.
