@@ -40,7 +40,7 @@ Things that I learned:
     I learned how Re-entrancy works and how it can be used to hack contracts.
 
 12. Elevator
-    I learned Why when I use pure and view functions.
+    I learned Why/when I should use pure and view functions.
 
 13. Privacy
     I learned more about the Ethereum storage layout and how it handles an array of bytes.

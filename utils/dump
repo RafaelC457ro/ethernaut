@@ -1,0 +1,57 @@
+
+======= Solver.yul (EVM) =======
+
+Pretty printed source:
+object "Solver" {
+    code {
+        {
+            let runtime_size := datasize("runtime")
+            datacopy(0, dataoffset("runtime"), runtime_size)
+            return(0, runtime_size)
+        }
+    }
+    object "runtime" {
+        code {
+            {
+                mstore(0x80, 0x2a)
+                return(0x80, 32)
+            }
+        }
+    }
+}
+
+
+Binary representation:
+600a80600c6000396000f3fe602a60805260206080f3
+
+Text representation:
+    /* "Solver.yul":58:77   */
+  dataSize(sub_0)
+    /* "Solver.yul":108:129   */
+  dup1
+  dataOffset(sub_0)
+    /* "Solver.yul":147:148   */
+  0x00
+    /* "Solver.yul":138:179   */
+  codecopy
+    /* "Solver.yul":147:148   */
+  0x00
+    /* "Solver.yul":188:211   */
+  return
+stop
+
+sub_0: assembly {
+        /* "Solver.yul":282:286   */
+      0x2a
+        /* "Solver.yul":276:280   */
+      0x80
+        /* "Solver.yul":269:287   */
+      mstore
+        /* "Solver.yul":378:380   */
+      0x20
+        /* "Solver.yul":276:280   */
+      0x80
+        /* "Solver.yul":365:381   */
+      return
+}
+

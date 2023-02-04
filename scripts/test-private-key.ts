@@ -1,6 +1,7 @@
 import { ethers } from "hardhat";
 
 /**
+ *  I created the PRIVATE_KEY_3 from scratch
  *  require openssl and sha3sum
  *  generating privatekey with openssl (https://kobl.one/blog/create-full-ethereum-keypair-and-address/)
  *  https://ethereum.stackexchange.com/questions/18656/is-it-possible-to-generate-a-priv-key-from-scratch
