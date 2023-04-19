@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "hardhat/console.sol";
-
 contract Privacy {
     bool public locked = true;
     uint256 public ID = block.timestamp;
@@ -17,7 +15,6 @@ contract Privacy {
 
     function unlock(bytes16 _key) public {
         require(_key == bytes16(data[2]));
-
         locked = false;
     }
 

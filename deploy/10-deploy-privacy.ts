@@ -20,7 +20,6 @@ const deployment: DeployFunction = async function ({
       ethers.utils.formatBytes32String("bar"),
     ];
 
-    console.log(data);
     await deploy("Privacy", {
       from: targetDeployer,
       args: [data],
