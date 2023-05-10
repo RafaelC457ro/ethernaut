@@ -59,3 +59,50 @@ Things that I learned:
 
 16. NaughtCoin
     It was easy. Make sure You know how ERC20 allowance works.
+
+17. Preservation
+    This example demonstrates why the library keyword should be used for building libraries, as it prevents the libraries from storing and accessing state variables.
+
+18. Recovery
+    I solved this in a different way than the intended solution. I took a look into the transactions in the network and find the contract address that was used to solve the challenge. But the correct way to solve this should be calculate the contract address by calculating
+    keccak256(address, nonce) where the address is the address of the contract (or ethereum address that created the transaction) and nonce is the number of contracts the spawning contract has created (or the transaction nonce, for regular transactions).
+
+19. MagicNumber
+    In order to solve this challange it was necessary learn about EVM asssembly
+    sources: https://mirror.xyz/0xB38709B8198d147cc9Ff9C133838a044d78B064B/Hh69VJWM5eiFYFINxYWrIYWcRRtPm8tw3VFjpdpx6T8
+    after that I coded a yul file that run the initial contract init and the runtime that returns 42. (see utils/Solver.yul)
+    and compiled using solc compiler command: `solc --strict-assembly --optimize --optimize-runs 200 Solver.yul > dump`
+    which generated the bytecode: 0x600a80600c6000396000f3fe602a60805260206080f3
+
+20. Alien Codex
+    I learned about how the storage layout works in Solidity, and how to exploit uint overflow in older versions of Solidity.
+
+21. Denial
+    This level demonstrates that external calls to unknown contracts can still create denial of service attack vectors if a fixed amount of gas is not specified.
+
+22. Shop
+    It's unsafe to change the state based on external and untrusted contracts logic.
+
+23. Dex
+    I learned that getting prices or any sort of data from any single source is a massive attack vector in smart contracts. It's better to use a decentralized oracle to get the price of an asset.
+
+24. Dex Two
+    Same as Dex.
+
+25. Puzzle Wallet
+    I learned about storage collisions, datacall bytes, arrays of bytes and how msg.sender and msg.value behave in the delegatecall.
+
+26. Motorbike
+    O learned about how storage behaves in UUPS proxies.
+
+27. Double Entry Point
+    I just follow through the code and found the vulnerability by using the legacy token.
+
+28. Good Samaritan
+    I used a custom error to trigger the transfer of funds.
+
+29. Gatekeeper Three
+    Not a big deal, I just followed the code and found the vulnerability.
+
+30. Switch
+    This one was tricky. I learned about how to use abi.encodePacked and abi.encode to assembly a calldata, and how bytes are shapped in a calldata.

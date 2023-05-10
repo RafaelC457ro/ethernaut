@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./Denial.sol";
+import "./target/Denial.sol";
 
 contract DenialAttacker {
     Denial denial;

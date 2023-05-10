@@ -14,15 +14,32 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
-      { version: "0.8.1" },
       {
-        version: "0.6.6",
+        version: "0.5.3",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
       },
       {
         version: "0.6.12",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
       },
       {
-        version: "0.5.0",
+        version: "0.8.12",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
       },
     ],
   },
@@ -40,6 +57,15 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY_3!,
       ],
       chainId: 5,
+    },
+    sepolia: {
+      url: process.env.SEFOLIA_RPC_URL!,
+      accounts: [
+        process.env.PRIVATE_KEY!,
+        process.env.PRIVATE_KEY_2!,
+        process.env.PRIVATE_KEY_3!,
+      ],
+      chainId: 11155111,
     },
     localhost: {
       url: "http://127.0.0.1:8545/",

@@ -8,9 +8,10 @@ object "Solver" {
 
     object "runtime" {
         code {
+            // store 42 at 0 memory address
             mstore(0x80, 0x2a)
             // return value at 0 memory address of size 32 bytes
-            return(0x80, 32) 
+            return(0x80, 0x20) 
         }
     }
 }

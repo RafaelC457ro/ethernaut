@@ -7,7 +7,7 @@ contract MagicNum {
     constructor() {}
 
     function setSolver(address _solver) public {
-        // my validation
+        // this is not part of the original contract
         bytes32 payload;
         uint256 size;
         assembly {
