@@ -52,10 +52,7 @@ contract GatekeeperThree {
     }
 
     modifier gateThree() {
-        if (
-            address(this).balance > 0.001 ether &&
-            payable(owner).send(0.001 ether) == false
-        ) {
+        if (address(this).balance > 0.001 ether && payable(owner).send(0.001 ether) == false) {
             _;
         }
     }

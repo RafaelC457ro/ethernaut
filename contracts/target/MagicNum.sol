@@ -18,16 +18,13 @@ contract MagicNum {
             revert("size should equal and less then 10");
         }
 
-        (, bytes memory data) = _solver.call(
-            abi.encodePacked(bytes4(keccak256("whatIsTheMeaningOfLife()")))
-        );
+        (, bytes memory data) = _solver.call(abi.encodePacked(bytes4(keccak256("whatIsTheMeaningOfLife()"))));
         assembly {
             payload := mload(add(data, 0x20))
         }
 
         if (
-            payload !=
-            0x000000000000000000000000000000000000000000000000000000000000002a // 42
+            payload != 0x000000000000000000000000000000000000000000000000000000000000002a // 42
         ) {
             revert("not valid");
         }

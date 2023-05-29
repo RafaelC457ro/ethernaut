@@ -26,10 +26,7 @@ contract PuzzleProxy is UpgradeableProxy {
     }
 
     function approveNewAdmin(address _expectedAdmin) external onlyAdmin {
-        require(
-            pendingAdmin == _expectedAdmin,
-            "Expected new admin by the current admin is not the pending admin"
-        );
+        require(pendingAdmin == _expectedAdmin, "Expected new admin by the current admin is not the pending admin");
         admin = pendingAdmin;
     }
 
@@ -70,11 +67,7 @@ contract PuzzleWallet {
         balances[msg.sender] += msg.value;
     }
 
-    function execute(
-        address to,
-        uint256 value,
-        bytes calldata data
-    ) external payable onlyWhitelisted {
+    function execute(address to, uint256 value, bytes calldata data) external payable onlyWhitelisted {
         require(balances[msg.sender] >= value, "Insufficient balance");
         balances[msg.sender] -= value;
         (bool success, ) = to.call{value: value}(data);

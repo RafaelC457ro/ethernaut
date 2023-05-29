@@ -22,28 +22,16 @@ contract Dex is Ownable {
     }
 
     function swap(address from, address to, uint amount) public {
-        require(
-            (from == token1 && to == token2) ||
-                (from == token2 && to == token1),
-            "Invalid tokens"
-        );
-        require(
-            IERC20(from).balanceOf(msg.sender) >= amount,
-            "Not enough to swap"
-        );
+        require((from == token1 && to == token2) || (from == token2 && to == token1), "Invalid tokens");
+        require(IERC20(from).balanceOf(msg.sender) >= amount, "Not enough to swap");
         uint swapAmount = getSwapPrice(from, to, amount);
         IERC20(from).transferFrom(msg.sender, address(this), amount);
         IERC20(to).approve(address(this), swapAmount);
         IERC20(to).transferFrom(address(this), msg.sender, swapAmount);
     }
 
-    function getSwapPrice(
-        address from,
-        address to,
-        uint amount
-    ) public view returns (uint) {
-        return ((amount * IERC20(to).balanceOf(address(this))) /
-            IERC20(from).balanceOf(address(this)));
+    function getSwapPrice(address from, address to, uint amount) public view returns (uint) {
+        return ((amount * IERC20(to).balanceOf(address(this))) / IERC20(from).balanceOf(address(this)));
     }
 
     function approve(address spender, uint amount) public {
@@ -51,10 +39,7 @@ contract Dex is Ownable {
         SwappableToken(token2).approve(msg.sender, spender, amount);
     }
 
-    function balanceOf(
-        address token,
-        address account
-    ) public view returns (uint) {
+    function balanceOf(address token, address account) public view returns (uint) {
         return IERC20(token).balanceOf(account);
     }
 }

